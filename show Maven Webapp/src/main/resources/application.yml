@@ -1,0 +1,16 @@
+spring:
+  http:
+    encoding: 
+      force: true
+      charset: utf-8
+      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3307/ls?characterEncoding=utf-8
+    username: root
+    password: usbw
+    dirver-class-name: com.mysql.jdbc.Driver
+    Type: com.alibaba.druid.pool.DruidDataSource
+server:
+  port: 80
+  tomcat:
+    uri-encoding: UTF-8

@@ -1,0 +1,187 @@
+<head>
+	<title>text_2</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/text_2.css">
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="../css/element-ui.css">
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<!-- 引入组件库 -->
+	<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+    <script src="../js/element-ui.js"></script>
+</head>
+<body>
+	<!--头部-->
+	<div class="header">
+		<!--logo-->
+		<div class="logo">
+			<img src="../images/logo.png">
+		</div>
+		<!--导航栏-->
+		<div class="nav">
+			<ul>
+				<li><a href="index.html">GO BACK</a></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="none"></div>
+	<!--主体-->
+	<div class="main">
+		<div class="about">
+			<div class="container1">
+				<!--标题-->
+				<div class="title">
+					<a href="" style="color: #000000;">Income Classification</a>
+				</div>
+				<!-- 收入分类 -->
+				<div class="income-container">
+					<el-button type="primary" @click="z"style="background-color: rgb(7,203,201);margin-left: -30px;">增加收入分类</el-button>
+					<div v-for="(good,index) in goods" style="width: 100%; height:200px; margin-top:2%;border: 3px rgb(7,203,201) solid;line-height: 200px;border-radius: 30px;">
+						<div class="ceng ceng1" style="float: left;"><strong>分类名：</strong>{{good.name}}</div>
+						<div class="ceng ceng1" style="float: left;"><strong>类型：</strong>{{good.inorout}}</div>
+						<div class="ceng ceng1" style="float: left;"><el-button type="primary" @click="g(good)"style="background-color: rgb(228,57,60);margin-top: 45%;background-color: rgb(7,203,201);border-radius: 30px;">修改收入分类</el-button></div>
+						<div class="ceng ceng1" style="float: left;"><el-button type="primary" @click="s(good)"style="background-color: rgb(228,57,60);margin-top: 45%;background-color: rgb(7,203,201);border-radius: 30px;">删除收入分类</el-button></div>
+					</div>
+					<el-dialog title="增加收入分类" :visible.sync="add" width="60%">
+						<div style="margin-left: 10%; width: 100%;">
+							<el-form label-width="20%" style="width: 100%;">
+								<el-form-item label="收入分类名：">
+									<el-input v-model="form.name" style="width:50%" />
+								</el-form-item>
+							</el-form>
+						</div>
+						<span slot="footer">
+							<el-button @click="add = false">取 消</el-button>
+							<el-button type="primary" @click="addsure">确 定</el-button>
+					 	</span>
+					</el-dialog>
+					<el-dialog title="修改收入分类" :visible.sync="update" width="60%">
+						<div style="margin-left: 10%; width: 100%;">
+							<el-form label-width="20%" style="width: 100%;">
+								<el-form-item label="收入分类名：">
+									<el-input v-model="form.name" style="width:50%" />
+								</el-form-item>
+							</el-form>
+						</div>
+						<span slot="footer">
+							<el-button @click="update = false">取 消</el-button>
+							<el-button type="primary" @click="updatesure">确 定</el-button>
+					 	</span>
+					</el-dialog>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<!--底部-->
+	<div class="footerss">
+		&copy;2016&nbsp;imooc.com&nbsp;京ICP备13046642号
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el: '.main',
+			data:function() {
+				return {
+					sel:'',
+					form: {
+						id:'',
+						name:'',
+						inorout:''
+						
+					},
+					goods:[],
+					add: false,
+					update:false,
+			        value: ''
+				}
+			},
+			methods: {
+				z() {
+					this.form.name='';
+					this.add = true
+				},
+				s(good) {
+					this.form.id=good.id;
+					var _this=this;
+					console.log(good.name);
+					$.ajax({
+					 	url:"http://127.0.0.1/user/deleteSort",    //请求的url地址
+					    dataType:"json",   //返回格式为json
+					    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+					    contentType:'application/json',
+						data:JSON.stringify(_this.form),    //参数值
+					    type:"post",   //请求方式
+						success:function(data){
+							_this.goods=data;
+							_this.$message("成功");
+							_this.getgoods();
+						}
+							
+					});
+				},
+				g(good) {
+					this.form.id=good.id;
+					this.form.name=good.name;
+					this.update=true;
+				},
+				addsure(){
+					this.add=false;
+					this.form.inorout='收入';
+					console.log(this.form);
+					var _this=this;
+					$.ajax({
+					 	url:"http://127.0.0.1/user/addSort",    //请求的url地址
+					    dataType:"json",   //返回格式为json
+					    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+						contentType:'application/json',
+					    data:JSON.stringify(_this.form),    //参数值
+					    type:"post",   //请求方式
+						success:function(data){
+							_this.goods=data;
+							_this.$message("成功");
+							_this.getgoods();
+						}
+							
+					});
+				},
+				updatesure(){
+					this.update=false;
+					this.form.inorout='收入';
+					console.log(this.form);
+					var _this=this;
+					$.ajax({
+					 	url:"http://127.0.0.1/user/updateSort",    //请求的url地址
+					    dataType:"json",   //返回格式为json
+					    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+					    contentType:'application/json',
+						data:JSON.stringify(_this.form),    //参数值
+					    type:"post",   //请求方式
+						success:function(data){
+							_this.goods=data;
+							_this.$message("成功");
+							_this.getgoods();
+						}
+							
+					});
+				},
+				getgoods(){
+					var _this=this;
+					$.ajax({
+					 	url:"http://127.0.0.1/user/selectSort",    //请求的url地址
+					    dataType:"json",   //返回格式为json
+					    async:true,//请求是否异步，默认为异步，这也是ajax重要特性   //参数值 
+						type:"get",   //请求方式
+						success:function(data){
+							_this.goods=data.data;
+						}
+							
+					});
+				}
+			},
+			created(){
+				this.getgoods();
+			}
+		});
+	</script>
+</body>
+</html>

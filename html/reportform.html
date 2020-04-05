@@ -1,0 +1,142 @@
+<head>
+	<title>text_2</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/text_2.css">
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="../css/element-ui.css">
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<!-- 引入组件库 -->
+	<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+    <script src="../js/element-ui.js"></script>
+</head>
+<body>
+	<!--头部-->
+	<div class="header">
+		<!--logo-->
+		<div class="logo">
+			<img src="../images/logo.png">
+		</div>
+		<!--导航栏-->
+		<div class="nav">
+			<ul>
+				<li><a href="index.html">GO BACK</a></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="none"></div>
+	<!--主体-->
+	<div class="main">
+		<div class="about">
+			<div class="container1">
+				<!--标题-->
+				<div class="title">
+					<a href="reportform.html" style="color: #000000;">Report Form</a>
+				</div>
+				<!-- 报表内容 -->
+				<div class="report">
+					<span style="float: left;margin-left: 50px;margin-top: 5px;">总收入：<span>{{incomesum}}</span>元</span>
+					<el-button type="primary" @click="z"style="background-color: rgb(7,203,201);">打印报表</el-button>
+					<el-button type="primary" @click="jisuan"style="background-color: rgb(7,203,201);">计算财务</el-button>
+					<span style="float: right;margin-right: 50px;margin-top: 5px;">总支出：<span>{{outsums}}</span>元</span>
+					<div v-for="(good,index) in goods" style="width: 100%; height:100px;border: 1px rgb(7,203,201) solid;line-height: 200px;border-radius: 30px;">
+						<div class="ceng6" style="float: left;"><strong>名称：</strong>{{good.financename}}</div>
+						<div class="ceng6" style="float: left;"><strong>分类名：</strong>{{good.sorts}}</div>
+						<div class="ceng6" style="float: left;"><strong>金额：</strong>{{good.money}}</div>
+						<div class="ceng7" style="float: left;"><strong>时间：</strong><span style="font-size: 12px;">{{good.time}}</span></div>
+						<div class="ceng6" style="float: left;"><strong>类型：</strong>{{good.inoutsort}}</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<!--底部-->
+	<div class="footerss">
+		&copy;2016&nbsp;imooc.com&nbsp;京ICP备13046642号
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el: '.main',
+			data:function() {
+				return {
+					incomesum:'',
+					outsums:'',
+					form: {
+						id:'',
+						financename:'',
+						sorts:'',
+						money:'',
+						time:'',
+						inoutrun:''
+						
+					},
+					goods:[]
+				}
+			},
+			methods: {
+				z() {
+					this.form.financename='';
+					this.form.sorts='';
+					this.form.money='';
+					this.form.time='';
+					this.add = true;
+					this.reportform();
+					this.insum();
+					this.outsum();
+				},
+				jisuan() {
+					var result=this.incomesum-this.outsums;
+					if(result>=0){
+						alert("共计盈利"+result+"元");
+					}else{
+						alert("共计亏损"+result+"元");
+					}
+				},
+				reportform(){
+					var _this=this;
+					$.ajax({
+					 	url:"http://127.0.0.1/user/reportform",    //请求的url地址
+					    dataType:"json",   //返回格式为json
+					    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+					    type:"get",   //请求方式
+						success:function(data){
+							console.log(data);
+							_this.goods=data.data;
+						}
+							
+					});
+				},
+				insum(){
+					var _this=this;
+					$.ajax({
+					 	url:"http://127.0.0.1/user/insum",    //请求的url地址
+					    dataType:"json",   //返回格式为json
+					    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+					    type:"get",   //请求方式
+						success:function(data){
+							console.log(data);
+							_this.incomesum=data.data;
+						}
+							
+					});
+				},
+				outsum(){
+					var _this=this;
+					$.ajax({
+					 	url:"http://127.0.0.1/user/outsum",    //请求的url地址
+					    dataType:"json",   //返回格式为json
+					    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+					    type:"get",   //请求方式
+						success:function(data){
+							console.log(data);
+							_this.outsums=data.data;
+						}
+							
+					});
+				}
+			}
+		});
+	</script>
+</body>
+</html>

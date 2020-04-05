@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>index</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/text_2.css">
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="../css/element-ui.css">
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<!-- 引入组件库 -->
+	<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+    <script src="../js/element-ui.js"></script>
+</head>
+<body>
+	<!--头部-->
+	<div class="header">
+		<!--logo-->
+		<div class="logo">
+			<img src="../images/logo.png">
+		</div>
+		<!--导航栏-->
+		<div class="nav">
+			<ul>
+				<li><a href="index.html">HOME</a></li>
+				<li><a href="reportform.html">FORM</a></li>
+				<li><a href="incomesort.html">INSORT</a></li>
+				<li><a href="outsort.html">OUTSORT</a></li>
+				<li><a href="incomerun.html">INRUN</a></li>
+				<li><a href="outrun.html">OUTRUN</a></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="none"></div>
+	<!--主体-->
+	<div class="main">
+		<!--banner图-->
+		<div class="banner">
+			<img src="../images/banner3.jpg">
+		</div>
+		<!--遮罩层-->
+		<div class="topLayer"></div>
+		<!--遮罩层上面-->
+		<div class="topLayer-top" >
+			<div class="topLayer-top-form" >
+				<el-form ref="form" :model="form" label-width="100px" :rules="rules" >
+	                <el-form-item label="Username"  prop="username">
+	                    <el-input v-model="form.username"></el-input>
+	                </el-form-item>
+	                <el-form-item label="Password" prop="password">
+	                    <el-input v-model="form.password" type="password"></el-input>
+	                </el-form-item>
+	                <el-form-item>
+	                    <el-button  @click="onSubmit" style="background-color: transparent;color: #ffffff;">Log in</el-button>
+	                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                    <el-button  @click="Reset" style="background-color: transparent;color: #ffffff;">Reset</el-button>
+	                </el-form-item>
+	              </el-form-item>
+	            </el-form>
+            </div>
+		</div>
+		<!--ABOUT-->
+		<div class="about">
+			<div class="container1">
+				<!--标题-->
+				<div class="title">
+					<a @click="wordforms" style="color: #000000;cursor: pointer;">Report Form</a>
+				</div>
+				<!--水平短线-->
+				<div class="line"></div>
+				<!--ABOUT中的文字-->
+				<div class="about-word">
+					Lorem Ipsum is simply dummy text of the printing and typesetting
+					<br>
+					industry.Lorem Ipsum has been the industry's standard dummy
+					<br>
+					text ever since the 1500s.
+				</div>
+				<!--ABOUT中第一部分的图文混排-->
+				<div class="pic-word">
+					<div class="word-1">
+						A WORD
+						<br>
+						ABOUT US
+					</div>
+					<div class="word-2">
+						<div class="word-2-1">
+							Praesent dignissim viverra est,sed
+							<br>
+							bibenddum ligula congue non.Sed ac nisl
+							<br>
+							et felis gravida commodo? Suspendisse
+							<br>
+							eget ullamcorper ipsum. Suspendisse 
+							<br>
+							diam amet.
+							<br>
+						</div>
+						<div class="word-2-2">
+							<button id="btregister" @click="wordforms">EXPLORE</button>
+						</div>
+					</div>
+					<div class="pic">
+						<img src="../images/bb3.png">
+					</div>
+					<div class="word-3">
+						<div class="mumber1">600</div>
+						<div class="line1"><hr></div>
+						<div class="word1">Personal</div>
+					</div>
+					<div class="word-4">
+						<div class="mumber2">70000</div>
+						<div class="line2"><hr></div>
+						<div class="word2">Finance</div>
+					</div>
+				</div>
+			</div>
+			<!--about中第二部分的图文混排-->
+			<div class="container2">
+				<div class="pic1">
+					<img src="../images/b1.png">
+					<div class="triangle"></div>
+				</div>
+				<div class="words1">
+					<div class="words1-1">
+						Income Classification
+					</div>
+					<div class="words1-2">
+						Lorem Ipsum is simply dummy text of the
+						<br>
+						printing and typesetting industry
+					</div>
+					<div class="words1-3">
+						Lorem Ipsum has been the industry's standard 
+						<br>
+						dummy text ever since the 1500s,when an unknown 
+						<br>
+						printer took a galley of type and scrambled it to  
+						<br>
+						make a type specimen book.
+					</div>
+					<div class="words1-4"><button id="btinsort" @click="incomesort">EXPLORE</button></div>
+				</div>
+				<div class="pic2">
+					<img src="../images/b2.png">
+					<div class="triangle"></div>
+				</div>
+				<div class="words2">
+					<div class="words1-1">
+						Expenditure Classification
+					</div>
+					<div class="words1-2">
+						Lorem Ipsum is simply dummy text of the
+						<br>
+						printing and typesetting industry
+					</div>
+					<div class="words1-3">
+						Lorem Ipsum has been the industry's standard 
+						<br>
+						dummy text ever since the 1500s,when an unknown 
+						<br>
+						printer took a galley of type and scrambled it to  
+						<br>
+						make a type specimen book.
+					</div>
+					<div class="words1-4"><button id="btoutsort" @click="outsort">EXPLORE</button></div>
+				</div>
+				<div class="words3">
+					<div class="words1-1">
+						Income Management
+					</div>
+					<div class="words1-2">
+						Lorem Ipsum is simply dummy text of the
+						<br>
+						printing and typesetting industry
+					</div>
+					<div class="words1-3">
+						Lorem Ipsum has been the industry's standard 
+						<br>
+						dummy text ever since the 1500s,when an unknown 
+						<br>
+						printer took a galley of type and scrambled it to  
+						<br>
+						make a type specimen book.
+					</div>
+					<div class="words1-4"><button id="btinrun" @click="incomerun">EXPLORE</button></div>
+				</div>
+				<div class="pic3">
+					<img src="../images/b3.png">
+					<div class="triangle"></div>
+				</div>
+				<div class="words4">
+					<div class="words1-1">
+						Expenditure Management
+					</div>
+					<div class="words1-2">
+						Lorem Ipsum is simply dummy text of the
+						<br>
+						printing and typesetting industry
+					</div>
+					<div class="words1-3">
+						Lorem Ipsum has been the industry's standard 
+						<br>
+						dummy text ever since the 1500s,when an unknown 
+						<br>
+						printer took a galley of type and scrambled it to  
+						<br>
+						make a type specimen book.
+					</div>
+					<div class="words1-4"><button id="btoutrun" @click="outrun">EXPLORE</button></div>
+				</div>
+				<div class="pic4">
+					<img src="../images/b4.png">
+				</div>
+			</div>
+		</div>
+		<!--GALLERY-->
+		<div class="gallery">
+			<div class="container1">
+				<!--标题-->
+				<div class="title">
+					GALLERY
+				</div>
+				<!--水平短线-->
+				<div class="line"></div>
+				<!--GALLERY中的文字-->
+				<div class="about-word">
+					Lorem Ipsum is simply dummy text of the printing and typesetting
+					<br>
+					industry.Lorem Ipsum has been the industry's standard dummy
+					<br>
+					text ever since the 1500s.
+				</div>
+				<!--GALLERY中的图文混排-->
+				<div class="pic-word">
+					<div class="pic-word1">
+						<div class="pic-word-pic"><img src="../images/03-01.png"></div>
+						<div class="pic-word-word">BOOKKEEPING SERVICE</div>
+					</div>
+					<div class="pic-word2">
+						<div class="pic-word-pic"><img src="../images/03-02.png"></div>
+						<div class="pic-word-word">PRIVATE RECEIPT</div>
+					</div>
+					<div class="pic-word3">
+						<div class="pic-word-pic"><img src="../images/03-03.png"></div>
+						<div class="pic-word-word">AUDITING SERVICE</div>
+					</div>
+					<div class="pic-word4">
+						<div class="pic-word-pic"><img src="../images/03-04.png"></div>
+						<div class="pic-word-word">EQUITY MARKET</div>
+					</div>
+					<div class="pic-word5">
+						<div class="pic-word-pic"><img src="../images/03-05.png"></div>
+						<div class="pic-word-word">ECONOMIC CRISIS</div>
+					</div>
+					<div class="pic-word6">
+						<div class="pic-word-pic"><img src="../images/03-06.png"></div>
+						<div class="pic-word-word">FOREIGN EXCHANGE CRISIS</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--底部-->
+	<div class="footers">
+		&copy;2016&nbsp;imooc.com&nbsp;京ICP备13046642号
+	</div>
+	<script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="../js/button.js"></script>
+</body>
+</html>
